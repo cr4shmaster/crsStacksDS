@@ -1,13 +1,19 @@
-name = "Stacks"
+name = "Stacks TEST"
 description = "Modifies the maximum stack size of all stackable items."
 author = "cr4shmaster"
-version = "1.8.1"
+version = "2.0.0"
 forumthread = ""
 api_version = 6
 dont_starve_compatible = true
 reign_of_giants_compatible = true
+shipwrecked_compatible = true
 icon_atlas = "modicon.xml"
 icon = "modicon.tex"
+
+--[[ 
+Notes:
+ - can't handle custom stacks for every single item separately
+--]]
 
 local crsToggle = {
  {description = "Enabled", data = 1},
@@ -45,35 +51,57 @@ local crsStacks = {
 
 configuration_options = {
 	{
-		name = "crsChangeAllStacksSize",
-		label = "Change All To",
+		name = "crsChangeSmallStacksSize",
+		label = "Small Stacks",
 		options = crsStacks,
 		default = 100,
 	},
-	-- {
-		-- name = "crsCustomStacksToggle",
-		-- label = "Enable Custom Stacks",
-		-- options = crsToggle,
-		-- default = 1,
-	-- },
+	{
+		name = "crsChangeMediumStacksSize",
+		label = "Medium Stacks",
+		options = crsStacks,
+		default = 100,
+	},
+	{
+		name = "crsChangeLargeStacksSize",
+		label = "Large Stacks",
+		options = crsStacks,
+		default = 100,
+	},
+ -- tallbird eggs
  {
 		name = "crsTallbirdEggsCanStackToggle",
 		label = "Stackable Tallbird Eggs",
 		options = crsToggle,
 		default = 1,
 	},
+ -- bees
 	{
 		name = "crsBeesDontDieToggle",
 		label = "Bees Never Die",
 		options = crsToggle,
 		default = 1,
 	},
+ {
+		name = "crsBeesRemoveMurderToggle",
+		label = "Can't Murder Bees",
+		options = crsToggle,
+		default = 1,
+	},
+ -- butterflies
 	{
 		name = "crsButterfliesDontDieToggle",
 		label = "Butterflies Never Die",
 		options = crsToggle,
 		default = 1,
 	},
+ {
+		name = "crsButterfliesRemoveMurderToggle",
+		label = "Can't Murder Butterflies",
+		options = crsToggle,
+		default = 1,
+	},
+ -- rabbits
 	{
 		name = "crsRabbitsDontDieToggle",
 		label = "Rabbits Never Die",
@@ -87,6 +115,13 @@ configuration_options = {
 		default = 1,
 	},
  {
+		name = "crsRabbitsRemoveMurderToggle",
+		label = "Can't Murder Rabbits",
+		options = crsToggle,
+		default = 1,
+	},
+ -- birds
+ {
 		name = "crsBirdsDontDieToggle",
 		label = "Birds Never Die",
 		options = crsToggle,
@@ -98,6 +133,13 @@ configuration_options = {
 		options = crsToggle,
 		default = 1,
 	},
+ {
+		name = "crsBirdsRemoveMurderToggle",
+		label = "Can't Murder Birds",
+		options = crsToggle,
+		default = 1,
+	},
+ -- moles
  {
 		name = "crsMolesDontDieToggle",
 		label = "Moles Never Die",
@@ -111,38 +153,15 @@ configuration_options = {
 		default = 1,
 	},
  {
-		name = "crsMosquitosDontDieToggle",
-		label = "Mosquitos Never Die",
-		options = crsToggle,
-		default = 1,
-	},
- {
-		name = "crsBeesRemoveMurderToggle",
-		label = "Can't Murder Bees",
-		options = crsToggle,
-		default = 1,
-	},
- {
-		name = "crsButterfliesRemoveMurderToggle",
-		label = "Can't Murder Butterflies",
-		options = crsToggle,
-		default = 1,
-	},
- {
-		name = "crsRabbitsRemoveMurderToggle",
-		label = "Can't Murder Rabbits",
-		options = crsToggle,
-		default = 1,
-	},
- {
 		name = "crsMolesRemoveMurderToggle",
 		label = "Can't Murder Moles",
 		options = crsToggle,
 		default = 1,
 	},
+ -- mosquitos
  {
-		name = "crsBirdsRemoveMurderToggle",
-		label = "Can't Murder Birds",
+		name = "crsMosquitosDontDieToggle",
+		label = "Mosquitos Never Die",
 		options = crsToggle,
 		default = 1,
 	},
@@ -152,209 +171,23 @@ configuration_options = {
 		options = crsToggle,
 		default = 1,
 	},
- 
-	-- {name = "ash", label = "Ash", options = crsStacks, default = 100,},
-	-- {name = "feather_robin_winter", label = "Azure Feather", options = crsStacks, default = 100,},
- 
-	-- {name = "baconeggs", label = "Bacon and Eggs", options = crsStacks, default = 100,},
-	-- {name = "trinket_7", label = "Ball and Cup", options = crsStacks, default = 100,},
-	-- {name = "bandage", label = "Bandage", options = crsStacks, default = 100,},
-	-- {name = "beardhair", label = "Beard Hair", options = crsStacks, default = 100,},
-	-- {name = "bee", label = "Bee", options = crsStacks, default = 100,},
-	-- {name = "beefalowool", label = "Beefalo Wool", options = crsStacks, default = 100,},
-	-- {name = "berries", label = "Berries", options = crsStacks, default = 100,},
-	-- {name = "dug_berrybush", label = "Berry Bush", options = crsStacks, default = 100,},
-	-- {name = "blowdart_pipe", label = "Blow Dart", options = crsStacks, default = 100,},
-	-- {name = "blue_cap", label = "Blue Cap", options = crsStacks, default = 100,},
-	-- {name = "bluegem", label = "Blue Gem", options = crsStacks, default = 100,},
-	-- {name = "boards", label = "Boards", options = crsStacks, default = 100,},
-	-- {name = "slurtle_shellpieces", label = "Broken Shell", options = crsStacks, default = 100,},
-	-- {name = "butter", label = "Butter", options = crsStacks, default = 100,},
-	-- {name = "butterfly", label = "Butterfly", options = crsStacks, default = 100,},
-	-- {name = "butterflywings", label = "Butterfly Wings", options = crsStacks, default = 100,},
-	-- {name = "butterflymuffin", label = "Butter Muffin", options = crsStacks, default = 100,},
-	-- {name = "turf_carpetfloor", label = "Carpeted Flooring", options = crsStacks, default = 100,},
- 
-	-- {name = "carrot", label = "Carrot", options = crsStacks, default = 100,},
-	-- {name = "carrot_seeds", label = "Carrot Seeds", options = crsStacks, default = 100,},
-	-- {name = "cave_banana", label = "Cave Banana", options = crsStacks, default = 100,},
-	-- {name = "turf_underrock", label = "Cave Rock Turf", options = crsStacks, default = 100,},
-	-- {name = "charcoal", label = "Charcoal", options = crsStacks, default = 100,},
-	-- {name = "turf_checkerfloor", label = "Checkered Flooring", options = crsStacks, default = 100,},
-	-- {name = "turf_road", label = "Cobblestones", options = crsStacks, default = 100,},
- -- {name = "cave_banana_cooked", label = "Cooked Banana", options = crsStacks, default = 100,},
-	-- {name = "batwing_cooked", label = "Cooked Batilisk Wing", options = crsStacks, default = 100,},
-	-- {name = "berries_cooked", label = "Cooked Berries", options = crsStacks, default = 100,},
-	-- {name = "blue_cap_cooked", label = "Cooked Blue Cap", options = crsStacks, default = 100,},
-	-- {name = "carrot_cooked", label = "Cooked Carrot", options = crsStacks, default = 100,},
-	-- {name = "corn_cooked", label = "Cooked Corn", options = crsStacks, default = 100,},
-	-- {name = "dragonfruit_cooked", label = "Cooked Dragon Fruit", options = crsStacks, default = 100,},
-	-- {name = "durian_cooked", label = "Cooked Durian", options = crsStacks, default = 100,},
-	-- {name = "eggplant_cooked", label = "Cooked Eggplant", options = crsStacks, default = 100,},
-	-- {name = "green_cap_cooked", label = "Cooked Green Cap", options = crsStacks, default = 100,},
-	-- {name = "plantmeat_cooked", label = "Cooked Leafy Meat", options = crsStacks, default = 100,},
-	-- {name = "cookedmeat", label = "Cooked Meat", options = crsStacks, default = 100,},
-	-- {name = "cookedmonstermeat", label = "Cooked Monster Meat", options = crsStacks, default = 100,},
-	-- {name = "cookedsmallmeat", label = "Cooked Morsel", options = crsStacks, default = 100,},
-	-- {name = "pomegranate_cooked", label = "Cooked Pomegranate", options = crsStacks, default = 100,},
-	-- {name = "pumpkin_cooked", label = "Cooked Pumpkin", options = crsStacks, default = 100,},
-	-- {name = "red_cap_cooked", label = "Cooked Red Cap", options = crsStacks, default = 100,},
-	-- {name = "corn", label = "Corn", options = crsStacks, default = 100,},
-	-- {name = "corn_seeds", label = "Corn Seeds", options = crsStacks, default = 100,},
-	-- {name = "feather_robin", label = "Crimson Feather", options = crsStacks, default = 100,},
-	-- {name = "feather_crow", label = "Crow Feather", options = crsStacks, default = 100,},
-	-- {name = "cutgrass", label = "Cut Grass", options = crsStacks, default = 100,},
-	-- {name = "cutstone", label = "Cut Stone", options = crsStacks, default = 100,},
- 
-	-- {name = "petals_evil", label = "Dark Petals", options = crsStacks, default = 100,},
-	-- {name = "trinket_12", label = "Dessicated Tentacle", options = crsStacks, default = 100,},
-	-- {name = "turf_dirt", label = "Dirt Turf", options = crsStacks, default = 100,},
-	-- {name = "dragonpie", label = "Dragonpie", options = crsStacks, default = 100,},
-	-- {name = "dragonfruit", label = "Dragon Fruit", options = crsStacks, default = 100,},
-	-- {name = "dragonfruit_seeds", label = "Dragon Fruit Seeds", options = crsStacks, default = 100,},
-	-- {name = "drumstick", label = "Drumstick", options = crsStacks, default = 100,},
-	-- {name = "durian", label = "Durian", options = crsStacks, default = 100,},
-	-- {name = "durian_seeds", label = "Durian Seeds", options = crsStacks, default = 100,},
- 
-	-- {name = "eel", label = "Eel", options = crsStacks, default = 100,},
-	-- {name = "egg", label = "Egg", options = crsStacks, default = 100,},
-	-- {name = "eggplant", label = "Eggplant", options = crsStacks, default = 100,},
-	-- {name = "eggplant_seeds", label = "Eggplant Seeds", options = crsStacks, default = 100,},
- 
-	-- {name = "trinket_2", label = "Fake Kazoo", options = crsStacks, default = 100,},
-	-- {name = "fireflies", label = "Fireflies", options = crsStacks, default = 100,},
-	-- {name = "blowdart_fire", label = "Fire Dart", options = crsStacks, default = 100,},
-	-- {name = "fish", label = "Fish", options = crsStacks, default = 100,},
-	-- {name = "fishtacos", label = "Fish Tacos", options = crsStacks, default = 100,},
-	-- {name = "fishsticks", label = "Fishsticks", options = crsStacks, default = 100,},
-	-- {name = "jammypreserves", label = "Fist Full of Jam", options = crsStacks, default = 100,},
-	-- {name = "lureplantbulb", label = "Fleshy Bulb", options = crsStacks, default = 100,},
-	-- {name = "flint", label = "Flint", options = crsStacks, default = 100,},
-	-- {name = "foliage", label = "Foliage", options = crsStacks, default = 100,},
-	-- {name = "turf_forest", label = "Forest Turf", options = crsStacks, default = 100,},
-	-- {name = "trinket_6", label = "Frazzled Wires", options = crsStacks, default = 100,},
-	-- {name = "drumstick_cooked", label = "Fried Drumstick", options = crsStacks, default = 100,},
-	-- {name = "froglegs", label = "Frog Legs", options = crsStacks, default = 100,},
-	-- {name = "frogglebunwich", label = "Froggle Bunwich", options = crsStacks, default = 100,},
-	-- {name = "fruitmedley", label = "Fruit Medley", options = crsStacks, default = 100,},
-	-- {name = "turf_fungus", label = "Fungal Turf", options = crsStacks, default = 100,},
-	-- {name = "turf_fungus_green", label = "Fungal Turf Green", options = crsStacks, default = 100,},
-	-- {name = "turf_fungus_red", label = "Fungal Turf Red", options = crsStacks, default = 100,},
- 
-	-- {name = "gears", label = "Gears", options = crsStacks, default = 100,},
-	-- {name = "trinket_4", label = "Gnome", options = crsStacks, default = 100,},
-	-- {name = "goldnugget", label = "Gold Nugget", options = crsStacks, default = 100,},
-	-- {name = "trinket_3", label = "Gord's Knot", options = crsStacks, default = 100,},
-	-- {name = "greengem", label = "Green Gem", options = crsStacks, default = 100,},
-	-- {name = "dug_grass", label = "Grass Tuft", options = crsStacks, default = 100,},
-	-- {name = "turf_grass", label = "Grass Turf", options = crsStacks, default = 100,},
-	-- {name = "green_cap", label = "Green Cap", options = crsStacks, default = 100,},
-	-- {name = "guano", label = "Guano", options = crsStacks, default = 100,},
-	-- {name = "turf_cave", label = "Guano Turf", options = crsStacks, default = 100,},
-	-- {name = "gunpowder", label = "Gunpowder", options = crsStacks, default = 100,},
- 
-	-- {name = "healingsalve", label = "Healing Salve", options = crsStacks, default = 100,},
-	-- {name = "trinket_8", label = "Hardened Rubber Bung", options = crsStacks, default = 100,},
-	-- {name = "wall_hay_item", label = "Hay Wall", options = crsStacks, default = 100,},
-	-- {name = "honey", label = "Honey", options = crsStacks, default = 100,},
-	-- {name = "honeyham", label = "Honey Ham", options = crsStacks, default = 100,},
-	-- {name = "honeynuggets", label = "Honey Nuggets", options = crsStacks, default = 100,},
-	-- {name = "honeycomb", label = "Honeycomb", options = crsStacks, default = 100,},
-	-- {name = "houndstooth", label = "Hound's Tooth", options = crsStacks, default = 100,},
- 
-	-- {name = "meat_dried", label = "Jerky", options = crsStacks, default = 100,},
- 
-	-- {name = "kabobs", label = "Kabobs", options = crsStacks, default = 100,},
-	-- {name = "trunk_summer", label = "Koalefant Trunk", options = crsStacks, default = 100,},
-	-- {name = "trunk_cooked", label = "Koalefant Trunk Steak", options = crsStacks, default = 100,},
- 
- -- {name = "cutlichen", label = "Lichen", options = crsStacks, default = 100,},
-	-- {name = "lightbulb", label = "Light Bulb", options = crsStacks, default = 100,},
-	-- {name = "livinglog", label = "Living Log", options = crsStacks, default = 100,},
-	-- {name = "log", label = "Log", options = crsStacks, default = 100,},
-	-- {name = "trinket_11", label = "Lying Robot", options = crsStacks, default = 100,},
- 
-	-- {name = "mandrake", label = "Mandrake", options = crsStacks, default = 100,},
-	-- {name = "mandrakesoup", label = "Mandrake Soup", options = crsStacks, default = 100,},
-	-- {name = "poop", label = "Manure", options = crsStacks, default = 100,},
-	-- {name = "marble", label = "Marble", options = crsStacks, default = 100,},
-	-- {name = "turf_marsh", label = "Marsh Turf", options = crsStacks, default = 100,},
-	-- {name = "meatballs", label = "Meatballs", options = crsStacks, default = 100,},
-	-- {name = "bonestew", label = "Meaty Stew", options = crsStacks, default = 100,},
-	-- {name = "trinket_1", label = "Melty Marbles", options = crsStacks, default = 100,},
-	-- {name = "trinket_9", label = "Mismatched Buttons", options = crsStacks, default = 100,},
-	-- {name = "monsterlasagna", label = "Monster Lasagna", options = crsStacks, default = 100,},
-	-- {name = "monstermeat_dried", label = "Monster Jerky", options = crsStacks, default = 100,},
-	-- {name = "mosquito", label = "Mosquito", options = crsStacks, default = 100,},
-	-- {name = "mosquitosack", label = "Mosquito Sack", options = crsStacks, default = 100,},
-	-- {name = "turf_mud", label = "Mud Turf", options = crsStacks, default = 100,},
- 
-	-- {name = "nightmarefuel", label = "Nightmare Fuel", options = crsStacks, default = 100,},
-	-- {name = "nitre", label = "Nitre", options = crsStacks, default = 100,},
- 
-	-- {name = "sunken_boat_trinket_5", label = "Old Boot", options = crsStacks, default = 100,},
- 
-	-- {name = "papyrus", label = "Papyrus", options = crsStacks, default = 100,},
-	-- {name = "petals", label = "Petals", options = crsStacks, default = 100,},
-	-- {name = "perogies", label = "Pierogi", options = crsStacks, default = 100,},
-	-- {name = "pigskin", label = "Pig Skin", options = crsStacks, default = 100,},
-	-- {name = "pinecone", label = "Pinecone", options = crsStacks, default = 100,},
-	-- {name = "pomegranate", label = "Pomegranate", options = crsStacks, default = 100,},
-	-- {name = "pomegranate_seeds", label = "Pomegranate Seeds", options = crsStacks, default = 100,},
-	-- {name = "powcake", label = "Powdercake", options = crsStacks, default = 100,},
-	-- {name = "pumpkin", label = "Pumpkin", options = crsStacks, default = 100,},
-	-- {name = "pumpkincookie", label = "Pumpkin Cookies", options = crsStacks, default = 100,},
-	-- {name = "pumpkin_seeds", label = "Pumpkin Seeds", options = crsStacks, default = 100,},
-	-- {name = "purplegem", label = "Purple Gem", options = crsStacks, default = 100,},
- 
-	-- {name = "manrabbit_tail", label = "Rabbit Fur", options = crsStacks, default = 100,},
-	-- {name = "ratatouille", label = "Ratatouille", options = crsStacks, default = 100,},
-	-- {name = "red_cap", label = "Red Cap", options = crsStacks, default = 100,},
-	-- {name = "redgem", label = "Red Gem", options = crsStacks, default = 100,},
-	-- {name = "cutreeds", label = "Reeds", options = crsStacks, default = 100,},
-	-- {name = "rocks", label = "Rocks", options = crsStacks, default = 100,},
-	-- {name = "turf_rocky", label = "Rocky Turf", options = crsStacks, default = 100,},
-	-- {name = "rope", label = "Rope", options = crsStacks, default = 100,},
-	-- {name = "spoiled_food", label = "Rot", options = crsStacks, default = 100,},
- 
-	-- {name = "dug_sapling", label = "Sapling", options = crsStacks, default = 100,},
-	-- {name = "turf_savanna", label = "Savanna Turf", options = crsStacks, default = 100,},
-	-- {name = "sunken_boat_trinket_4", label = "Sea Worther", options = crsStacks, default = 100,},
-	-- {name = "trinket_10", label = "Second-hand Dentures", options = crsStacks, default = 100,},
-	-- {name = "seeds", label = "Seeds", options = crsStacks, default = 100,},
-	-- {name = "sunken_boat_trinket_1", label = "Sextant", options = crsStacks, default = 100,},
-	-- {name = "silk", label = "Silk", options = crsStacks, default = 100,},
-	-- {name = "blowdart_sleep", label = "Sleep Dart", options = crsStacks, default = 100,},
-	-- {name = "turf_sinkhole", label = "Slimey Turf", options = crsStacks, default = 100,},
-	-- {name = "slurperpelt", label = "Slurper Pelt", options = crsStacks, default = 100,},
-	-- {name = "slurtleslime", label = "Slurtle Slime", options = crsStacks, default = 100,},
-	-- {name = "smallmeat_dried", label = "Small Jerky", options = crsStacks, default = 100,},
-	-- {name = "sunken_boat_trinket_3", label = "Soaked Candle", options = crsStacks, default = 100,},
-	-- {name = "spidereggsack", label = "Spider Eggs", options = crsStacks, default = 100,},
-	-- {name = "spidergland", label = "Spider Gland", options = crsStacks, default = 100,},
-	-- {name = "stinger", label = "Stinger", options = crsStacks, default = 100,},
-	-- {name = "wall_stone_item", label = "Stone Wall", options = crsStacks, default = 100,},
-	-- {name = "stuffedeggplant", label = "Stuffed Eggplant", options = crsStacks, default = 100,},
- 
-	-- {name = "taffy", label = "Taffy", options = crsStacks, default = 100,},
-	-- {name = "tallbirdegg", label = "Tallbird Egg", options = crsStacks, default = 100,},
-	-- {name = "tentaclespots", label = "Tentacle Spots", options = crsStacks, default = 100,},
-	-- {name = "thulecite", label = "Thulecite", options = crsStacks, default = 100,},
-	-- {name = "thulecite_pieces", label = "Thulecite Fragments", options = crsStacks, default = 100,},
-	-- {name = "wall_ruins_item", label = "Thulecite Wall", options = crsStacks, default = 100,},
-	-- {name = "trinket_5", label = "Tiny Rocketship", options = crsStacks, default = 100,},
-	-- {name = "sunken_boat_trinket_2", label = "Toy Boat", options = crsStacks, default = 100,},
-	-- {name = "turkeydinner", label = "Turkey Dinner", options = crsStacks, default = 100,},
-	-- {name = "twigs", label = "Twigs", options = crsStacks, default = 100,},
- 
-	-- {name = "unagi", label = "Unagi", options = crsStacks, default = 100,},
- 
-	-- {name = "waffles", label = "Waffles", options = crsStacks, default = 100,},
- -- {name = "walrus_tusk", label = "Walrus Tusk", options = crsStacks, default = 100,},
-	-- {name = "wetgoop", label = "Wet Goop", options = crsStacks, default = 100,},
-	-- {name = "trunk_winter", label = "Winter Koalefant Trunk", options = crsStacks, default = 100,},
-	-- {name = "turf_woodfloor", label = "Wooden Flooring", options = crsStacks, default = 100,},
-	-- {name = "wall_wood_item", label = "Wooden Wall", options = crsStacks, default = 100,},
- 
-	-- {name = "yellowgem", label = "Yellow Gem", options = crsStacks, default = 100,},
+ -- moles
+ {
+		name = "crsCrabsDontDieToggle",
+		label = "Crabs Never Die",
+		options = crsToggle,
+		default = 1,
+	},
+ {
+		name = "crsCrabsCanStackToggle",
+		label = "Stackable Crabs",
+		options = crsToggle,
+		default = 1,
+	},
+ {
+		name = "crsCrabsRemoveMurderToggle",
+		label = "Can't Murder Crabs",
+		options = crsToggle,
+		default = 1,
+	},
 }
