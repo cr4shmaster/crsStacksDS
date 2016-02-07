@@ -1,4 +1,4 @@
-name = "Stacks TEST"
+name = "Stacks v2.0"
 description = "Modifies the maximum stack size of all stackable items."
 author = "cr4shmaster"
 version = "2.0.0"
@@ -187,6 +187,25 @@ configuration_options = {
  {
   name = "crsCrabsRemoveMurderToggle",
   label = "Can't Murder Crabs",
+  options = crsToggle,
+  default = 1,
+ },
+ -- fish
+ {
+  name = "crsFishDontDieToggle",
+  label = "Fish Never Die",
+  options = crsToggle,
+  default = 1,
+ },
+ {
+  name = "crsFishCanStackToggle",
+  label = "Stackable Fish",
+  options = crsToggle,
+  default = 1,
+ },
+ {
+  name = "crsFishRemoveMurderToggle",
+  label = "Can't Murder Fish",
   options = crsToggle,
   default = 1,
  },
