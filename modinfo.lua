@@ -171,7 +171,7 @@ configuration_options = {
   options = crsToggle,
   default = 1,
  },
- -- moles
+ -- crabs
  {
   name = "crsCrabsDontDieToggle",
   label = "Crabs Never Die",

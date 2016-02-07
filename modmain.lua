@@ -30,6 +30,7 @@ local function crsRemoveMurder(inst)
 end
  
 if GLOBAL.IsDLCEnabled(GLOBAL.REIGN_OF_GIANTS) then
+
  -- make stackable
  -- tallbirdegg
  if GetModConfigData("crsTallbirdEggsCanStackToggle") then
@@ -93,7 +94,9 @@ if GLOBAL.IsDLCEnabled(GLOBAL.REIGN_OF_GIANTS) then
  if GetModConfigData("crsMosquitosRemoveMurderToggle") == 1 then
   AddPrefabPostInit("mosquito", crsRemoveMurder)
  end
+ 
 elseif GLOBAL.IsDLCEnabled(GLOBAL.CAPY_DLC) then
+
  -- make stackable
  -- birds
  if GetModConfigData("crsBirdsCanStackToggle") then
@@ -121,4 +124,5 @@ elseif GLOBAL.IsDLCEnabled(GLOBAL.CAPY_DLC) then
  if GetModConfigData("crsCrabsRemoveMurderToggle") == 1 then
   AddPrefabPostInit("crab", crsRemoveMurder)
  end
+ 
 end
