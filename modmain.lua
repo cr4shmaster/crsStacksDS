@@ -34,6 +34,11 @@ local function crsRemoveMurder(inst)
 end
  
  -- make stackable
+ AddPrefabPostInit("minotaurhorn", crsMakeStackable)
+ AddPrefabPostInit("tallbirdegg", crsMakeStackable)
+ if C then
+  AddPrefabPostInit("doydoyegg", crsMakeStackable)
+ end
  if GetModConfigData("crsRabbitsCanStackToggle") then
   AddPrefabPostInit("rabbit", crsMakeStackable)
  end
@@ -41,9 +46,6 @@ end
   AddPrefabPostInit("crow", crsMakeStackable)
   AddPrefabPostInit("robin", crsMakeStackable)
   AddPrefabPostInit("robin_winter", crsMakeStackable)
- end
- if GetModConfigData("crsTallbirdEggsCanStackToggle") then
-  AddPrefabPostInit("tallbirdegg", crsMakeStackable)
  end
  if GetModConfigData("crsMolesCanStackToggle") and (B or C) then
   AddPrefabPostInit("mole", crsMakeStackable)

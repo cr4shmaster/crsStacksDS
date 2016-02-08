@@ -1,7 +1,7 @@
 name = "Stacks v2.0"
 description = "Modifies the maximum stack size of all stackable items."
 author = "cr4shmaster"
-version = "2.0.0"
+version = "2.0.1"
 forumthread = ""
 api_version = 6
 dont_starve_compatible = true
@@ -68,14 +68,7 @@ configuration_options = {
   options = crsStacks,
   default = 100,
  },
- -- tallbird eggs
- {
-  name = "crsTallbirdEggsCanStackToggle",
-  label = "Stackable Tallbird Eggs",
-  options = crsToggle,
-  default = 1,
- },
- -- bees
+  -- bees
  {
   name = "crsBeesDontDieToggle",
   label = "Bees Never Die",
