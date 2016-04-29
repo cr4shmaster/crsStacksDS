@@ -1,7 +1,7 @@
 name = "Stacks v2.0"
 description = "Modifies the maximum stack size of all stackable items."
 author = "cr4shmaster"
-version = "2.0.1"
+version = "2.0.2"
 forumthread = ""
 api_version = 6
 dont_starve_compatible = true
@@ -10,10 +10,8 @@ shipwrecked_compatible = true
 icon_atlas = "modicon.xml"
 icon = "modicon.tex"
 
---[[ 
-Notes:
- - can't handle custom stacks for every single item separately
---]]
+-- Notes:
+-- Can't handle custom stacks for every single item separately
 
 local crsToggle = {
  {description = "Enabled", data = 1},
