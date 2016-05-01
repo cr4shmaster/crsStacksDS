@@ -200,4 +200,12 @@ configuration_options = {
   options = crsToggle,
   default = 1,
  },
+ {
+  name = "crsStacksTest",
+  label = "Installed",
+  options = {
+   {description = "Yes", data = 1},
+  },
+  default = 1,
+ },
 }
