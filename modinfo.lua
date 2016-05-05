@@ -1,7 +1,7 @@
 name = "Stacks v2.0"
 description = "Modifies the maximum stack size of all stackable items."
 author = "cr4shmaster"
-version = "2.0.2"
+version = "2.0.3"
 forumthread = ""
 api_version = 6
 dont_starve_compatible = true

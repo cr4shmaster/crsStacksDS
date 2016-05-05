@@ -37,6 +37,7 @@ end
  -- make stackable
  AddPrefabPostInit("minotaurhorn", crsMakeStackable)
  AddPrefabPostInit("tallbirdegg", crsMakeStackable)
+ AddPrefabPostInit("deerclops_eyeball", crsMakeStackable)
  if crsShipwreckedEnabled then
   AddPrefabPostInit("doydoyegg", crsMakeStackable)
  end
