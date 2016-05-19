@@ -1,12 +1,15 @@
--- set stack maxsize of all items
-TUNING.STACK_SIZE_LARGEITEM = GetModConfigData("crsChangeLargeStacksSize");
-TUNING.STACK_SIZE_MEDITEM = GetModConfigData("crsChangeMediumStacksSize");
-TUNING.STACK_SIZE_SMALLITEM = GetModConfigData("crsChangeSmallStacksSize");
+getConfig = GetModConfigData
+setPrefab = AddPrefabPostInit
 
-local crsNoDLCEnabled = not GLOBAL.IsDLCEnabled(GLOBAL.REIGN_OF_GIANTS) and not GLOBAL.IsDLCEnabled(GLOBAL.CAPY_DLC)
+-- local crsNoDLCEnabled = not GLOBAL.IsDLCEnabled(GLOBAL.REIGN_OF_GIANTS) and not GLOBAL.IsDLCEnabled(GLOBAL.CAPY_DLC)
 local crsAnyDLCEnabled = GLOBAL.IsDLCEnabled(GLOBAL.REIGN_OF_GIANTS) or GLOBAL.IsDLCEnabled(GLOBAL.CAPY_DLC)
-local crsReignOfGiantsEnabled = GLOBAL.IsDLCEnabled(GLOBAL.REIGN_OF_GIANTS)
+-- local crsReignOfGiantsEnabled = GLOBAL.IsDLCEnabled(GLOBAL.REIGN_OF_GIANTS)
 local crsShipwreckedEnabled = GLOBAL.IsDLCEnabled(GLOBAL.CAPY_DLC)
+
+-- set stack maxsize of all items
+TUNING.STACK_SIZE_LARGEITEM = getConfig("crsChangeLargeStacksSize");
+TUNING.STACK_SIZE_MEDITEM = getConfig("crsChangeMediumStacksSize");
+TUNING.STACK_SIZE_SMALLITEM = getConfig("crsChangeSmallStacksSize");
 
 local function crsMakeStackable(inst)
  inst:AddComponent("stackable")
@@ -35,114 +38,114 @@ local function crsRemoveMurder(inst)
 end
  
  -- make stackable
- AddPrefabPostInit("minotaurhorn", crsMakeStackable)
- AddPrefabPostInit("tallbirdegg", crsMakeStackable)
- AddPrefabPostInit("deerclops_eyeball", crsMakeStackable)
+ setPrefab("minotaurhorn", crsMakeStackable)
+ setPrefab("tallbirdegg", crsMakeStackable)
+ setPrefab("deerclops_eyeball", crsMakeStackable)
  if crsShipwreckedEnabled then
-  AddPrefabPostInit("doydoyegg", crsMakeStackable)
+  setPrefab("doydoyegg", crsMakeStackable)
  end
- if GetModConfigData("crsRabbitsCanStackToggle") then
-  AddPrefabPostInit("rabbit", crsMakeStackable)
+ if getConfig("crsRabbitsCanStackToggle") == 1 then
+  setPrefab("rabbit", crsMakeStackable)
  end
- if GetModConfigData("crsBirdsCanStackToggle")then
-  AddPrefabPostInit("crow", crsMakeStackable)
-  AddPrefabPostInit("robin", crsMakeStackable)
-  AddPrefabPostInit("robin_winter", crsMakeStackable)
+ if getConfig("crsBirdsCanStackToggle") == 1 then
+  setPrefab("crow", crsMakeStackable)
+  setPrefab("robin", crsMakeStackable)
+  setPrefab("robin_winter", crsMakeStackable)
  end
- if GetModConfigData("crsMolesCanStackToggle") and (crsAnyDLCEnabled) then
-  AddPrefabPostInit("mole", crsMakeStackable)
+ if getConfig("crsMolesCanStackToggle") == 1 and crsAnyDLCEnabled then
+  setPrefab("mole", crsMakeStackable)
  end
- if GetModConfigData("crsBirdsCanStackToggle") and crsShipwreckedEnabled then
-  AddPrefabPostInit("parrot_pirate", crsMakeStackable)
-  AddPrefabPostInit("toucan", crsMakeStackable)
-  AddPrefabPostInit("seagull", crsMakeStackable)
-  AddPrefabPostInit("parrot", crsMakeStackable)
-  AddPrefabPostInit("doydoy", crsMakeStackable)
+ if getConfig("crsBirdsCanStackToggle") == 1 and crsShipwreckedEnabled then
+  setPrefab("parrot_pirate", crsMakeStackable)
+  setPrefab("toucan", crsMakeStackable)
+  setPrefab("seagull", crsMakeStackable)
+  setPrefab("parrot", crsMakeStackable)
+  setPrefab("doydoy", crsMakeStackable)
  end
- if GetModConfigData("crsMoqsuitosCanStackToggle") and crsShipwreckedEnabled then
-  AddPrefabPostInit("mosquito_poison", crsMakeStackable)
+ if getConfig("crsMoqsuitosCanStackToggle") == 1 and crsShipwreckedEnabled then
+  setPrefab("mosquito_poison", crsMakeStackable)
  end
- if GetModConfigData("crsCrabsCanStackToggle") and crsShipwreckedEnabled then
-  AddPrefabPostInit("crab", crsMakeStackable)
-  AddPrefabPostInit("lobster", crsMakeStackable)
+ if getConfig("crsCrabsCanStackToggle") == 1 and crsShipwreckedEnabled then
+  setPrefab("crab", crsMakeStackable)
+  setPrefab("lobster", crsMakeStackable)
  end
- if GetModConfigData("crsFishCanStackToggle") and crsShipwreckedEnabled then
-  AddPrefabPostInit("jellyfish", crsMakeStackable)
+ if getConfig("crsFishCanStackToggle") == 1 and crsShipwreckedEnabled then
+  setPrefab("jellyfish", crsMakeStackable)
  end
  
  -- remove feedable
- if GetModConfigData("crsMolesDontDieToggle") and (crsAnyDLCEnabled) then
-  AddPrefabPostInit("mole", crsUnmakeFeedable)
+ if getConfig("crsMolesDontDieToggle") == 1 and crsAnyDLCEnabled then
+  setPrefab("mole", crsUnmakeFeedable)
  end
- if GetModConfigData("crsRabbitsDontDieToggle") and (crsAnyDLCEnabled) then
-  AddPrefabPostInit("rabbit", crsUnmakeFeedable)
+ if getConfig("crsRabbitsDontDieToggle") == 1 and crsAnyDLCEnabled then
+  setPrefab("rabbit", crsUnmakeFeedable)
  end
- if GetModConfigData("crsBirdsDontDieToggle") and (crsAnyDLCEnabled) then
-  AddPrefabPostInit("crow", crsUnmakeFeedable)
-  AddPrefabPostInit("robin", crsUnmakeFeedable)
-  AddPrefabPostInit("robin_winter", crsUnmakeFeedable)
+ if getConfig("crsBirdsDontDieToggle") == 1 and crsAnyDLCEnabled then
+  setPrefab("crow", crsUnmakeFeedable)
+  setPrefab("robin", crsUnmakeFeedable)
+  setPrefab("robin_winter", crsUnmakeFeedable)
  end
- if GetModConfigData("crsBeesDontDieToggle") and (crsAnyDLCEnabled) then
-  AddPrefabPostInit("bee", crsUnmakeFeedable)
-  AddPrefabPostInit("killerbee", crsUnmakeFeedable)
+ if getConfig("crsBeesDontDieToggle") == 1 and crsAnyDLCEnabled then
+  setPrefab("bee", crsUnmakeFeedable)
+  setPrefab("killerbee", crsUnmakeFeedable)
  end
- if GetModConfigData("crsButterfliesDontDieToggle") and (crsAnyDLCEnabled) then
-  AddPrefabPostInit("butterfly", crsUnmakeFeedable)
+ if getConfig("crsButterfliesDontDieToggle") == 1 and crsAnyDLCEnabled then
+  setPrefab("butterfly", crsUnmakeFeedable)
  end
- if GetModConfigData("crsMosquitosDontDieToggle") and crsShipwreckedEnabled then
-  AddPrefabPostInit("mosquito_poison", crsUnmakeFeedable)
+ if getConfig("crsMosquitosDontDieToggle") == 1 and crsShipwreckedEnabled then
+  setPrefab("mosquito_poison", crsUnmakeFeedable)
  end
- if GetModConfigData("crsMosquitosDontDieToggle") and (crsAnyDLCEnabled) then
-  AddPrefabPostInit("mosquito", crsUnmakeFeedable)
+ if getConfig("crsMosquitosDontDieToggle") == 1 and crsAnyDLCEnabled then
+  setPrefab("mosquito", crsUnmakeFeedable)
  end
- if GetModConfigData("crsFishDontDieToggle") and crsShipwreckedEnabled then
-  AddPrefabPostInit("jellyfish", crsUnmakeFeedable)
+ if getConfig("crsFishDontDieToggle") == 1 and crsShipwreckedEnabled then
+  setPrefab("jellyfish", crsUnmakeFeedable)
  end
- if GetModConfigData("crsBirdsDontDieToggle") and crsShipwreckedEnabled then
-  AddPrefabPostInit("toucan", crsUnmakeFeedable)
-  AddPrefabPostInit("parrot_pirate", crsUnmakeFeedable)
-  AddPrefabPostInit("seagull", crsUnmakeFeedable)
-  AddPrefabPostInit("parrot", crsUnmakeFeedable)
-  AddPrefabPostInit("doydoy", crsUnmakeFeedable)
+ if getConfig("crsBirdsDontDieToggle") == 1 and crsShipwreckedEnabled then
+  setPrefab("toucan", crsUnmakeFeedable)
+  setPrefab("parrot_pirate", crsUnmakeFeedable)
+  setPrefab("seagull", crsUnmakeFeedable)
+  setPrefab("parrot", crsUnmakeFeedable)
+  setPrefab("doydoy", crsUnmakeFeedable)
  end
- if GetModConfigData("crsCrabsDontDieToggle") and crsShipwreckedEnabled then
-  AddPrefabPostInit("crab", crsUnmakeFeedable)
-  AddPrefabPostInit("lobster", crsUnmakeFeedable)
+ if getConfig("crsCrabsDontDieToggle") == 1 and crsShipwreckedEnabled then
+  setPrefab("crab", crsUnmakeFeedable)
+  setPrefab("lobster", crsUnmakeFeedable)
  end
 
  -- remove murder
- if GetModConfigData("crsMolesRemoveMurderToggle") == 1 and (crsAnyDLCEnabled) then
-  AddPrefabPostInit("mole", crsRemoveMurder)
+ if getConfig("crsMolesRemoveMurderToggle") == 1 and crsAnyDLCEnabled then
+  setPrefab("mole", crsRemoveMurder)
  end
- if GetModConfigData("crsBirdsRemoveMurderToggle") == 1 and crsShipwreckedEnabled then
-  AddPrefabPostInit("toucan", crsRemoveMurder)
-  AddPrefabPostInit("parrot_pirate", crsRemoveMurder)
-  AddPrefabPostInit("seagull", crsRemoveMurder)
-  AddPrefabPostInit("parrot", crsRemoveMurder)
-  AddPrefabPostInit("doydoy", crsRemoveMurder)
+ if getConfig("crsBirdsRemoveMurderToggle") == 1 and crsShipwreckedEnabled then
+  setPrefab("toucan", crsRemoveMurder)
+  setPrefab("parrot_pirate", crsRemoveMurder)
+  setPrefab("seagull", crsRemoveMurder)
+  setPrefab("parrot", crsRemoveMurder)
+  setPrefab("doydoy", crsRemoveMurder)
  end
- if GetModConfigData("crsCrabsRemoveMurderToggle") == 1 and crsShipwreckedEnabled then
-  AddPrefabPostInit("crab", crsRemoveMurder)
-  AddPrefabPostInit("lobster", crsRemoveMurder)
+ if getConfig("crsCrabsRemoveMurderToggle") == 1 and crsShipwreckedEnabled then
+  setPrefab("crab", crsRemoveMurder)
+  setPrefab("lobster", crsRemoveMurder)
  end
- if GetModConfigData("crsBeesRemoveMurderToggle") == 1 then
-  AddPrefabPostInit("bee", crsRemoveMurder)
-  AddPrefabPostInit("killerbee", crsRemoveMurder)
+ if getConfig("crsBeesRemoveMurderToggle") == 1 then
+  setPrefab("bee", crsRemoveMurder)
+  setPrefab("killerbee", crsRemoveMurder)
  end
- if GetModConfigData("crsButterfliesRemoveMurderToggle") == 1 then
-  AddPrefabPostInit("butterfly", crsRemoveMurder)
+ if getConfig("crsButterfliesRemoveMurderToggle") == 1 then
+  setPrefab("butterfly", crsRemoveMurder)
  end
- if GetModConfigData("crsRabbitsRemoveMurderToggle") == 1 then
-  AddPrefabPostInit("rabbit", crsRemoveMurder)
+ if getConfig("crsRabbitsRemoveMurderToggle") == 1 then
+  setPrefab("rabbit", crsRemoveMurder)
  end
- if GetModConfigData("crsFishRemoveMurderToggle") == 1 and crsShipwreckedEnabled then
-  AddPrefabPostInit("jellyfish", crsRemoveMurder)
+ if getConfig("crsFishRemoveMurderToggle") == 1 and crsShipwreckedEnabled then
+  setPrefab("jellyfish", crsRemoveMurder)
  end
- if GetModConfigData("crsBirdsRemoveMurderToggle") == 1 then
-  AddPrefabPostInit("crow", crsRemoveMurder)
-  AddPrefabPostInit("robin", crsRemoveMurder)
-  AddPrefabPostInit("robin_winter", crsRemoveMurder)
+ if getConfig("crsBirdsRemoveMurderToggle") == 1 then
+  setPrefab("crow", crsRemoveMurder)
+  setPrefab("robin", crsRemoveMurder)
+  setPrefab("robin_winter", crsRemoveMurder)
  end
- if GetModConfigData("crsMosquitosRemoveMurderToggle") == 1 then
-  AddPrefabPostInit("mosquito", crsRemoveMurder)
+ if getConfig("crsMosquitosRemoveMurderToggle") == 1 then
+  setPrefab("mosquito", crsRemoveMurder)
  end
