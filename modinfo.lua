@@ -1,7 +1,7 @@
 name = "Stacks v2.0"
 description = "Modifies the maximum stack size of all stackable items."
 author = "cr4shmaster"
-version = "2.0.3"
+version = "2.0.4"
 forumthread = ""
 api_version = 6
 dont_starve_compatible = true
@@ -38,11 +38,13 @@ local crsStacks = {
  {description = "85", data = 85},
  {description = "90", data = 90},
  {description = "95", data = 95},
+ {description = "99", data = 99},
  {description = "100", data = 100},
  {description = "150", data = 150},
  {description = "200", data = 200},
  {description = "250", data = 250},
  {description = "500", data = 500},
+ {description = "999", data = 999},
  {description = "1000", data = 1000},
  {description = "9999", data = 9999},
 }
