@@ -152,6 +152,7 @@ if getConfig("crsMosquitosRemoveMurderToggle") == 1 then
 	setPrefab("mosquito", crsRemoveMurder)
 end
 
+-- fixing naughtiness/krampus when murdering stacks
 local function giveadditionalnaughtiness(self, inst)
 	local onkilledother_old = self.onkilledother
 	self.onkilledother = function(self,victim)
@@ -197,47 +198,3 @@ local function giveadditionalnaughtiness(self, inst)
 end
 
 AddComponentPostInit("kramped",giveadditionalnaughtiness)
-
---[[local function addmissingpushevents(act)
-	if stacksize > 1 then
-		for i = 2, stacksize do
-			act.doer:PushEvent("killed", {victim = murdered})
-		end
-	end
-end 
-
-AddComponentPostInit("ACTIONS.MURDER",addmissingpushevents) ]]--
-
-
---[[ GLOBAL.ACTIONS.MURDER.fn = function(act)
-		local murdered = act.invobject or act.target
-		if murdered and murdered.components.health then
-								
-				murdered.components.inventoryitem:RemoveFromOwner(true)
-
-				if murdered.components.health.murdersound then
-						act.doer.SoundEmitter:PlaySound(murdered.components.health.murdersound)
-				end
-
-				local stacksize = 1
-				if murdered.components.stackable then
-						stacksize = murdered.components.stackable.stacksize
-				end
-
-				if murdered.components.lootdropper then
-						for i = 1, stacksize do
-								local loots = murdered.components.lootdropper:GenerateLoot()
-								for k, v in pairs(loots) do
-										local loot = GLOBAL.SpawnPrefab(v)
-										act.doer.components.inventory:GiveItem(loot)
-								end      
-						end
-				end
-
-				act.doer:PushEvent("killed", {victim = murdered})
-				murdered:Remove()
-
-				return true
-		end
-end
-]]--
