@@ -193,7 +193,7 @@ local function giveadditionalnaughtiness(self, inst)
    elseif victim.prefab == "penguin" then
     self:OnNaughtyAction(2 * stacksize)
    elseif victim.prefab == "glommer" then
-    SElf:OnNaughtyAction(50 * stacksize)
+    self:OnNaughtyAction(50 * stacksize)
    elseif victim.prefab == "catcoon" then
     self:OnNaughtyAction(5 * stacksize)
    elseif victim.prefab == "toucan" then
