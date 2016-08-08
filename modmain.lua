@@ -163,35 +163,69 @@ local function giveadditionalnaughtiness(self, inst)
     print("stack")
     stacksize = victim.components.stackable.stacksize
     print(stacksize)
-    if victim.prefab == "pigman" then
-     if not victim.components.werebeast or not victim.components.werebeast:IsInWereState() then
-      self:OnNaughtyAction(3 * stacksize)
-     end
-    elseif victim.prefab == "babybeefalo" then
-     self:OnNaughtyAction(6 * stacksize)
-    elseif victim.prefab == "teenbird" then
-     self:OnNaughtyAction(2 * stacksize)
-    elseif victim.prefab == "smallbird" then
-     self:OnNaughtyAction(6 * stacksize)
-    elseif victim.prefab == "beefalo" then
-     self:OnNaughtyAction(4 * stacksize)
-    elseif victim.prefab == "crow" then
-     self:OnNaughtyAction(1 * stacksize)
-    elseif victim.prefab == "robin" then
-     self:OnNaughtyAction(2 * stacksize)
-    elseif victim.prefab == "robin_winter" then
-     self:OnNaughtyAction(2 * stacksize)
-    elseif victim.prefab == "butterfly" then
-     self:OnNaughtyAction(1 * stacksize)
-    elseif victim.prefab == "rabbit" then
-     self:OnNaughtyAction(1 * stacksize)
-    elseif victim.prefab == "tallbird" then
-     self:OnNaughtyAction(2 * stacksize)
-    elseif victim.prefab == "bunnyman" then
+   end
+   if victim.prefab == "pigman" then
+    if not victim.components.werebeast or not victim.components.werebeast:IsInWereState() then
      self:OnNaughtyAction(3 * stacksize)
-    elseif victim.prefab == "penguin" then
-     self:OnNaughtyAction(2 * stacksize)
     end
+   elseif victim.prefab == "babybeefalo" then
+    self:OnNaughtyAction(6 * stacksize)
+   elseif victim.prefab == "teenbird" then
+    self:OnNaughtyAction(2 * stacksize)
+   elseif victim.prefab == "smallbird" then
+    self:OnNaughtyAction(6 * stacksize)
+   elseif victim.prefab == "beefalo" then
+    self:OnNaughtyAction(4 * stacksize)
+   elseif victim.prefab == "crow" then
+    self:OnNaughtyAction(1 * stacksize)
+   elseif victim.prefab == "robin" then
+    self:OnNaughtyAction(2 * stacksize)
+   elseif victim.prefab == "robin_winter" then
+    self:OnNaughtyAction(2 * stacksize)
+   elseif victim.prefab == "butterfly" then
+    self:OnNaughtyAction(1 * stacksize)
+   elseif victim.prefab == "rabbit" then
+    self:OnNaughtyAction(1 * stacksize)
+   elseif victim.prefab == "tallbird" then
+    self:OnNaughtyAction(2 * stacksize)
+   elseif victim.prefab == "bunnyman" then
+    self:OnNaughtyAction(3 * stacksize)
+   elseif victim.prefab == "penguin" then
+    self:OnNaughtyAction(2 * stacksize)
+   elseif victim.prefab == "glommer" then
+    SElf:OnNaughtyAction(50 * stacksize)
+   elseif victim.prefab == "catcoon" then
+    self:OnNaughtyAction(5 * stacksize)
+   elseif victim.prefab == "toucan" then
+    self:OnNaughtyAction(1 * stacksize)
+   elseif victim.prefab == "parrot" then
+    self:OnNaughtyAction(2 * stacksize)
+   elseif victim.prefab == "parrot_pirate" then
+    self:OnNaughtyAction(6 * stacksize)
+   elseif victim.prefab == "seagull" then
+    self:OnNaughtyAction(1 * stacksize)
+   elseif victim.prefab == "crab" then
+    self:OnNaughtyAction(1 * stacksize)
+   elseif victim.prefab == "solofish" then
+    self:OnNaughtyAction(2 * stacksize)
+   elseif victim.prefab == "swordfish" then
+    self:OnNaughtyAction(4 * stacksize)
+   elseif victim.prefab == "whale_white" then
+    self:OnNaughtyAction(6 * stacksize)
+   elseif victim.prefab == "whale_blue" then
+    self:OnNaughtyAction(7 * stacksize)
+   elseif victim.prefab == "jellyfish_planted" then
+    self:OnNaughtyAction(1 * stacksize)
+   elseif victim.prefab == "ox" then
+    self:OnNaughtyAction(4 * stacksize)
+   elseif victim.prefab == "lobster" then
+    self:OnNaughtyAction(2 * stacksize)
+   elseif victim.prefab == "primeape" then
+    self:OnNaughtyAction(2 * stacksize)
+   elseif victim.prefab == "doydoy" then
+    self:OnNaughtyAction(GetWorld().components.doydoyspawner:GetInnocenceValue() * stacksize)
+   elseif victim.prefab == "twister_seal" then
+    self:OnNaughtyAction(50 * stacksize) --How could you?
    end
   end
  end
