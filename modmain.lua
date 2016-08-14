@@ -1,12 +1,13 @@
--- CREATE SHORTCUTS --
-
 getConfig = GetModConfigData
 setPrefab = AddPrefabPostInit
+IsDLCEnabled = GLOBAL.IsDLCEnabled
+RoG = GLOBAL.REIGN_OF_GIANTS
+SW = GLOBAL.CAPY_DLC
 
--- local noDLC = not GLOBAL.IsDLCEnabled(GLOBAL.REIGN_OF_GIANTS) and not GLOBAL.IsDLCEnabled(GLOBAL.CAPY_DLC)
-local anyDLC = GLOBAL.IsDLCEnabled(GLOBAL.REIGN_OF_GIANTS) or GLOBAL.IsDLCEnabled(GLOBAL.CAPY_DLC)
--- local rogDLC = GLOBAL.IsDLCEnabled(GLOBAL.REIGN_OF_GIANTS)
-local swDLC = GLOBAL.IsDLCEnabled(GLOBAL.CAPY_DLC)
+-- local noDLC = not IsDLCEnabled(RoG) and not GLOBAL.IsDLCEnabled(SW)
+local anyDLC = IsDLCEnabled(RoG) or IsDLCEnabled(SW)
+-- local rogDLC = IsDLCEnabled(RoG)
+local swDLC = IsDLCEnabled(SW)
 
 -- SET MAX STACK SIZE --
 
@@ -16,7 +17,7 @@ TUNING.STACK_SIZE_SMALLITEM = getConfig("cfgSmallStacks");
 
 -- UPDATE PREFABS --
 
-local prefabs = {
+local crsPrefabs = {
     -- animals --
     {prefab = "mole", dlc = anyDLC, noStarve = getConfig("cfgMolesNoStarve"), stackable = getConfig("cfgMolesStack"), cantMurder = getConfig("cfgMolesNoMurder")},
     {prefab = "crow", dlc = true, noStarve = getConfig("cfgBirdsNoStarve"), stackable = getConfig("cfgBirdsStack"), cantMurder = getConfig("cfgBirdsNoMurder")},
@@ -46,20 +47,20 @@ local prefabs = {
 }
 
 -- add stackable component --
-local function makeStackable(inst)
+local function crsMakeStackable(inst)
     inst:AddComponent("stackable")
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 end
 
 -- remove murder action --
-local function removeMurder(inst)
+local function crsRemoveMurder(inst)
     if inst.components.health then
         inst.components.health.cantMurder = false
     end
 end
 
 -- remove feedable component --
-local function unmakeFeedable(inst)
+local function crsUnmakeFeedable(inst)
     inst:RemoveComponent("perishable")
     inst.components.inventoryitem:SetOnPutInInventoryFn(function(inst)
         if oninventory then
@@ -73,25 +74,25 @@ local function unmakeFeedable(inst)
     end)
 end
 
-for k, v in pairs(prefabs) do
+for k, v in pairs(crsPrefabs) do
     if v.dlc then -- check if it's DLC is enabled
         if v.noStarve then
             if anyDLC then -- check if RoG or SW are enabled; there's no starving in vanilla 
-                setPrefab(v.prefab, unmakeFeedable)
+                setPrefab(v.prefab, crsUnmakeFeedable)
             end
         end
         if v.stackable then
-            setPrefab(v.prefab, makeStackable)
+            setPrefab(v.prefab, crsMakeStackable)
         end
         if v.cantMurder then
-            setPrefab(v.prefab, removeMurder)
+            setPrefab(v.prefab, crsRemoveMurder)
         end
     end
 end
 
 -- TWEAK KRAMPED COMPONENT FOR MURDERING STACKS --
 
-local victims = {
+local crsVictims = {
     {prefab = "babybeefalo", penalty = 6},
     {prefab = "teenbird", penalty = 2},
     {prefab = "smallbird", penalty = 6},
@@ -138,7 +139,7 @@ local function giveadditionalnaughtiness(self, inst)
             elseif victim.prefab == "doydoy" then
                 self:OnNaughtyAction(GetWorld().components.doydoyspawner:GetInnocenceValue() * stacksize)
             else
-                for k, v in pairs(victims) do
+                for k, v in pairs(crsVictims) do
                     if victim.prefab == v.prefab then
                         self:OnNaughtyAction(v.penalty * stacksize)
                     end

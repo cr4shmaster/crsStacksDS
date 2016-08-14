@@ -1,7 +1,6 @@
--- With Stacks you can:
--- Customize the maximum stack size of all stackable items
--- Make animals and other items stackable
--- Prevent animals from starving so there's no need to feed them
+-- Stacks allows the customization of the maximum stack size of all stackable items,
+--  makes animals and other items stackable, and prevents animals from starving,
+--  eliminating the need to feed them.
 
 -- Author:
 -- cr4shmaster: http://steamcommunity.com/id/cr4shmaster
@@ -12,7 +11,7 @@
 name = "Stacks v2.0"
 description = "Modifies the maximum stack size of all stackable items."
 author = "cr4shmaster"
-version = "2.0.8"
+version = "2.0.9.1"
 forumthread = ""
 api_version = 6
 dont_starve_compatible = true
@@ -211,6 +210,14 @@ configuration_options = {
         name = "cfgFishNoMurder",
         label = "Can't Murder Fish",
         options = crsToggle,
+        default = true,
+    },
+    {
+        name = "cfgTestCheck",
+        label = "Installed",
+        options = {
+            {description = "Yes", data = true},
+        },
         default = true,
     },
 }
