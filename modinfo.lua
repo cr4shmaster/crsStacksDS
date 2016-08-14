@@ -1,18 +1,18 @@
 -- With Stacks you can:
--- Customize the maximum size of stacks
--- Make more items stackable
+-- Customize the maximum stack size of all stackable items
+-- Make animals and other items stackable
 -- Prevent animals from starving so there's no need to feed them
 
 -- Author:
--- http://steamcommunity.com/id/cr4shmaster
+-- cr4shmaster: http://steamcommunity.com/id/cr4shmaster
 -- Contributors:
--- http://steamcommunity.com/id/whispershill
--- http://steamcommunity.com/id/jngeist
+-- Whismerhill: http://steamcommunity.com/id/whispershill
+-- JNGeist: http://steamcommunity.com/id/jngeist
 
 name = "Stacks v2.0"
 description = "Modifies the maximum stack size of all stackable items."
 author = "cr4shmaster"
-version = "2.0.6"
+version = "2.0.8"
 forumthread = ""
 api_version = 6
 dont_starve_compatible = true
@@ -25,8 +25,8 @@ icon = "modicon.tex"
 -- Can't handle custom stacks for every single item separately
 
 local crsToggle = {
-    {description = "Enabled", data = 1},
-    {description = "Disabled", data = 0},
+    {description = "Enabled", data = true},
+    {description = "Disabled", data = false},
 }
 
 local crsStacks = {
@@ -62,155 +62,155 @@ local crsStacks = {
 
 configuration_options = {
     {
-        name = "crsChangeSmallStacksSize",
+        name = "cfgSmallStacks",
         label = "Small Stacks",
         options = crsStacks,
         default = 100,
     },
     {
-        name = "crsChangeMediumStacksSize",
+        name = "cfgMediumStacks",
         label = "Medium Stacks",
         options = crsStacks,
         default = 100,
     },
     {
-        name = "crsChangeLargeStacksSize",
+        name = "cfgLargeStacks",
         label = "Large Stacks",
         options = crsStacks,
         default = 100,
     },
-    -- BEES --
+    -- bees --
     {
-        name = "crsBeesDontDieToggle",
+        name = "cfgBeesNoStarve",
         label = "Bees Never Die",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
     {
-        name = "crsBeesRemoveMurderToggle",
+        name = "cfgBeesNoMurder",
         label = "Can't Murder Bees",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
-    -- BUTTERFLIES --
+    -- butterflies --
     {
-        name = "crsButterfliesDontDieToggle",
+        name = "cfgButterfliesNoStarve",
         label = "Butterflies Never Die",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
     {
-        name = "crsButterfliesRemoveMurderToggle",
+        name = "cfgButterfliesNoMurder",
         label = "Can't Murder Butterflies",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
-    -- RABBITS --
+    -- rabbits --
     {
-        name = "crsRabbitsDontDieToggle",
+        name = "cfgRabbitsNoStarve",
         label = "Rabbits Never Die",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
     {
-        name = "crsRabbitsCanStackToggle",
+        name = "cfgRabbitsStack",
         label = "Stackable Rabbits",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
     {
-        name = "crsRabbitsRemoveMurderToggle",
+        name = "cfgRabbitsNoMurder",
         label = "Can't Murder Rabbits",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
-    -- BIRDS --
+    -- birds --
     {
-        name = "crsBirdsDontDieToggle",
+        name = "cfgBirdsNoStarve",
         label = "Birds Never Die",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
     {
-        name = "crsBirdsCanStackToggle",
+        name = "cfgBirdsStack",
         label = "Stackable Birds",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
     {
-        name = "crsBirdsRemoveMurderToggle",
+        name = "cfgBirdsNoMurder",
         label = "Can't Murder Birds",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
-    -- MOLES --
+    -- moles --
     {
-        name = "crsMolesDontDieToggle",
+        name = "cfgMolesNoStarve",
         label = "Moles Never Die",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
     {
-        name = "crsMolesCanStackToggle",
+        name = "cfgMolesStack",
         label = "Stackable Moles",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
     {
-        name = "crsMolesRemoveMurderToggle",
+        name = "cfgMolesNoMurder",
         label = "Can't Murder Moles",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
-    -- MOSQUITOS --
+    -- mosquitos --
     {
-        name = "crsMosquitosDontDieToggle",
+        name = "cfgMosquitosNoStarve",
         label = "Mosquitos Never Die",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
     {
-        name = "crsMosquitosRemoveMurderToggle",
+        name = "cfgMosquitosNoMurder",
         label = "Can't Murder Mosquitos",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
-    -- CRABS --
+    -- crabs --
     {
-        name = "crsCrabsDontDieToggle",
+        name = "cfgCrabsNoStarve",
         label = "Crabs Never Die",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
     {
-        name = "crsCrabsCanStackToggle",
+        name = "cfgCrabsStack",
         label = "Stackable Crabs",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
     {
-        name = "crsCrabsRemoveMurderToggle",
+        name = "cfgCrabsNoMurder",
         label = "Can't Murder Crabs",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
-    -- FISH --
+    -- fish --
     {
-        name = "crsFishDontDieToggle",
+        name = "cfgFishNoStarve",
         label = "Fish Never Die",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
     {
-        name = "crsFishCanStackToggle",
+        name = "cfgFishStack",
         label = "Stackable Fish",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
     {
-        name = "crsFishRemoveMurderToggle",
+        name = "cfgFishNoMurder",
         label = "Can't Murder Fish",
         options = crsToggle,
-        default = 1,
+        default = true,
     },
 }

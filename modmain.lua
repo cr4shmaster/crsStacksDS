@@ -3,63 +3,63 @@
 getConfig = GetModConfigData
 setPrefab = AddPrefabPostInit
 
--- local crsNoDLCEnabled = not GLOBAL.IsDLCEnabled(GLOBAL.REIGN_OF_GIANTS) and not GLOBAL.IsDLCEnabled(GLOBAL.CAPY_DLC)
-local crsAnyDLCEnabled = GLOBAL.IsDLCEnabled(GLOBAL.REIGN_OF_GIANTS) or GLOBAL.IsDLCEnabled(GLOBAL.CAPY_DLC)
--- local crsReignOfGiantsEnabled = GLOBAL.IsDLCEnabled(GLOBAL.REIGN_OF_GIANTS)
-local crsShipwreckedEnabled = GLOBAL.IsDLCEnabled(GLOBAL.CAPY_DLC)
+-- local noDLC = not GLOBAL.IsDLCEnabled(GLOBAL.REIGN_OF_GIANTS) and not GLOBAL.IsDLCEnabled(GLOBAL.CAPY_DLC)
+local anyDLC = GLOBAL.IsDLCEnabled(GLOBAL.REIGN_OF_GIANTS) or GLOBAL.IsDLCEnabled(GLOBAL.CAPY_DLC)
+-- local rogDLC = GLOBAL.IsDLCEnabled(GLOBAL.REIGN_OF_GIANTS)
+local swDLC = GLOBAL.IsDLCEnabled(GLOBAL.CAPY_DLC)
 
 -- SET MAX STACK SIZE --
 
-TUNING.STACK_SIZE_LARGEITEM = getConfig("crsChangeLargeStacksSize");
-TUNING.STACK_SIZE_MEDITEM = getConfig("crsChangeMediumStacksSize");
-TUNING.STACK_SIZE_SMALLITEM = getConfig("crsChangeSmallStacksSize");
+TUNING.STACK_SIZE_LARGEITEM = getConfig("cfgLargeStacks");
+TUNING.STACK_SIZE_MEDITEM = getConfig("cfgMediumStacks");
+TUNING.STACK_SIZE_SMALLITEM = getConfig("cfgSmallStacks");
 
--- ADD STACKABLE COMPONENT --
+-- UPDATE PREFABS --
 
-local function crsMakeStackable(inst)
+local prefabs = {
+    -- animals --
+    {prefab = "mole", dlc = anyDLC, noStarve = getConfig("cfgMolesNoStarve"), stackable = getConfig("cfgMolesStack"), cantMurder = getConfig("cfgMolesNoMurder")},
+    {prefab = "crow", dlc = true, noStarve = getConfig("cfgBirdsNoStarve"), stackable = getConfig("cfgBirdsStack"), cantMurder = getConfig("cfgBirdsNoMurder")},
+    {prefab = "robin", dlc = true, noStarve = getConfig("cfgBirdsNoStarve"), stackable = getConfig("cfgBirdsStack"), cantMurder = getConfig("cfgBirdsNoMurder")},
+    {prefab = "robin_winter", dlc = true, noStarve = getConfig("cfgBirdsNoStarve"), stackable = getConfig("cfgBirdsStack"), cantMurder = getConfig("cfgBirdsNoMurder")},
+    {prefab = "rabbit", dlc = true, noStarve = getConfig("cfgRabbitsNoStarve"), stackable = getConfig("cfgRabbitsStack"), cantMurder = getConfig("cfgRabbitsNoMurder")},
+    {prefab = "bee", dlc = anyDLC, noStarve = getConfig("cfgBeesNoStarve"), cantMurder = getConfig("cfgBeesNoMurder")},
+    {prefab = "killerbee", dlc = anyDLC, noStarve = getConfig("cfgBeesNoStarve"), cantMurder = getConfig("cfgBeesNoMurder")},
+    {prefab = "butterfly", dlc = anyDLC, noStarve = getConfig("cfgButterfliesNoStarve"), cantMurder = getConfig("cfgButterfliesNoMurder")},
+    {prefab = "mosquito_poison", dlc = swDLC, noStarve = getConfig("cfgMosquitosNoStarve"), cantMurder = getConfig("cfgMosquitosNoMurder")},
+    {prefab = "mosquito", dlc = anyDLC, noStarve = getConfig("cfgMosquitosNoStarve"), cantMurder = getConfig("cfgMosquitosNoMurder")},
+    {prefab = "jellyfish", dlc = swDLC, noStarve = getConfig("cfgFishNoStarve"), stackable = getConfig("cfgFishStack"), cantMurder = getConfig("cfgFishNoMurder")},
+    {prefab = "toucan", dlc = swDLC, noStarve = getConfig("cfgBirdsNoStarve"), stackable = getConfig("cfgBirdsStack"), cantMurder = getConfig("cfgBirdsNoMurder")},
+    {prefab = "parrot_pirate", dlc = swDLC, noStarve = getConfig("cfgBirdsNoStarve"), stackable = getConfig("cfgBirdsStack"), cantMurder = getConfig("cfgBirdsNoMurder")},
+    {prefab = "seagull", dlc = swDLC, noStarve = getConfig("cfgBirdsNoStarve"), stackable = getConfig("cfgBirdsStack"), cantMurder = getConfig("cfgBirdsNoMurder")},
+    {prefab = "parrot", dlc = swDLC, noStarve = getConfig("cfgBirdsNoStarve"), stackable = getConfig("cfgBirdsStack"), cantMurder = getConfig("cfgBirdsNoMurder")},
+    {prefab = "doydoy", dlc = swDLC, noStarve = getConfig("cfgBirdsNoStarve"), stackable = getConfig("cfgBirdsStack"), cantMurder = getConfig("cfgBirdsNoMurder")},
+    {prefab = "crab", dlc = swDLC, noStarve = getConfig("cfgCrabsNoStarve"), stackable = getConfig("cfgCrabsStack"), cantMurder = getConfig("cfgCrabsNoMurder")},
+    {prefab = "lobster", dlc = swDLC, noStarve = getConfig("cfgCrabsNoStarve"), stackable = getConfig("cfgCrabsStack"), cantMurder = getConfig("cfgCrabsNoMurder")},
+    
+    -- items --
+    {prefab = "glommerwings", dlc = true, stackable = true},
+    {prefab = "minotaurhorn", dlc = true, stackable = true},
+    {prefab = "tallbirdegg", dlc = true, stackable = true},
+    {prefab = "deerclops_eyeball", dlc = true, stackable = true},
+    {prefab = "doydoyegg", dlc = swDLC, stackable = true},
+}
+
+-- add stackable component --
+local function makeStackable(inst)
     inst:AddComponent("stackable")
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 end
 
-setPrefab("glommerwings", crsMakeStackable)
-setPrefab("minotaurhorn", crsMakeStackable)
-setPrefab("tallbirdegg", crsMakeStackable)
-setPrefab("deerclops_eyeball", crsMakeStackable)
-if crsShipwreckedEnabled then
-    setPrefab("doydoyegg", crsMakeStackable)
-end
-if getConfig("crsRabbitsCanStackToggle") == 1 then
-    setPrefab("rabbit", crsMakeStackable)
-end
-if getConfig("crsBirdsCanStackToggle") == 1 then
-    setPrefab("crow", crsMakeStackable)
-    setPrefab("robin", crsMakeStackable)
-    setPrefab("robin_winter", crsMakeStackable)
-end
-if getConfig("crsMolesCanStackToggle") == 1 and crsAnyDLCEnabled then
-    setPrefab("mole", crsMakeStackable)
-end
-if getConfig("crsBirdsCanStackToggle") == 1 and crsShipwreckedEnabled then
-    setPrefab("parrot_pirate", crsMakeStackable)
-    setPrefab("toucan", crsMakeStackable)
-    setPrefab("seagull", crsMakeStackable)
-    setPrefab("parrot", crsMakeStackable)
-    setPrefab("doydoy", crsMakeStackable)
-end
-if getConfig("crsMoqsuitosCanStackToggle") == 1 and crsShipwreckedEnabled then
-    setPrefab("mosquito_poison", crsMakeStackable)
-end
-if getConfig("crsCrabsCanStackToggle") == 1 and crsShipwreckedEnabled then
-    setPrefab("crab", crsMakeStackable)
-    setPrefab("lobster", crsMakeStackable)
-end
-if getConfig("crsFishCanStackToggle") == 1 and crsShipwreckedEnabled then
-    setPrefab("jellyfish", crsMakeStackable)
+-- remove murder action --
+local function removeMurder(inst)
+    if inst.components.health then
+        inst.components.health.cantMurder = false
+    end
 end
 
--- REMOVE FEEDABLE COMPONENT --
-
-local function crsUnmakeFeedable(inst)
+-- remove feedable component --
+local function unmakeFeedable(inst)
     inst:RemoveComponent("perishable")
     inst.components.inventoryitem:SetOnPutInInventoryFn(function(inst)
         if oninventory then
@@ -73,92 +73,25 @@ local function crsUnmakeFeedable(inst)
     end)
 end
 
-if getConfig("crsMolesDontDieToggle") == 1 and crsAnyDLCEnabled then
-    setPrefab("mole", crsUnmakeFeedable)
-end
-if getConfig("crsRabbitsDontDieToggle") == 1 and crsAnyDLCEnabled then
-    setPrefab("rabbit", crsUnmakeFeedable)
-end
-if getConfig("crsBirdsDontDieToggle") == 1 and crsAnyDLCEnabled then
-    setPrefab("crow", crsUnmakeFeedable)
-    setPrefab("robin", crsUnmakeFeedable)
-    setPrefab("robin_winter", crsUnmakeFeedable)
-end
-if getConfig("crsBeesDontDieToggle") == 1 and crsAnyDLCEnabled then
-    setPrefab("bee", crsUnmakeFeedable)
-    setPrefab("killerbee", crsUnmakeFeedable)
-end
-if getConfig("crsButterfliesDontDieToggle") == 1 and crsAnyDLCEnabled then
-    setPrefab("butterfly", crsUnmakeFeedable)
-end
-if getConfig("crsMosquitosDontDieToggle") == 1 and crsShipwreckedEnabled then
-    setPrefab("mosquito_poison", crsUnmakeFeedable)
-end
-if getConfig("crsMosquitosDontDieToggle") == 1 and crsAnyDLCEnabled then
-    setPrefab("mosquito", crsUnmakeFeedable)
-end
-if getConfig("crsFishDontDieToggle") == 1 and crsShipwreckedEnabled then
-    setPrefab("jellyfish", crsUnmakeFeedable)
-end
-if getConfig("crsBirdsDontDieToggle") == 1 and crsShipwreckedEnabled then
-    setPrefab("toucan", crsUnmakeFeedable)
-    setPrefab("parrot_pirate", crsUnmakeFeedable)
-    setPrefab("seagull", crsUnmakeFeedable)
-    setPrefab("parrot", crsUnmakeFeedable)
-    setPrefab("doydoy", crsUnmakeFeedable)
-end
-if getConfig("crsCrabsDontDieToggle") == 1 and crsShipwreckedEnabled then
-    setPrefab("crab", crsUnmakeFeedable)
-    setPrefab("lobster", crsUnmakeFeedable)
-end
-
--- REMOVE MURDER ACTION --
-
-local function crsRemoveMurder(inst)
-    if inst.components.health then
-        inst.components.health.canmurder = false
+for k, v in pairs(prefabs) do
+    if v.dlc then -- check if it's DLC is enabled
+        if v.noStarve then
+            if anyDLC then -- check if RoG or SW are enabled; there's no starving in vanilla 
+                setPrefab(v.prefab, unmakeFeedable)
+            end
+        end
+        if v.stackable then
+            setPrefab(v.prefab, makeStackable)
+        end
+        if v.cantMurder then
+            setPrefab(v.prefab, removeMurder)
+        end
     end
-end
-
-if getConfig("crsMolesRemoveMurderToggle") == 1 and crsAnyDLCEnabled then
-    setPrefab("mole", crsRemoveMurder)
-end
-if getConfig("crsBirdsRemoveMurderToggle") == 1 and crsShipwreckedEnabled then
-    setPrefab("toucan", crsRemoveMurder)
-    setPrefab("parrot_pirate", crsRemoveMurder)
-    setPrefab("seagull", crsRemoveMurder)
-    setPrefab("parrot", crsRemoveMurder)
-    setPrefab("doydoy", crsRemoveMurder)
-end
-if getConfig("crsCrabsRemoveMurderToggle") == 1 and crsShipwreckedEnabled then
-    setPrefab("crab", crsRemoveMurder)
-    setPrefab("lobster", crsRemoveMurder)
-end
-if getConfig("crsBeesRemoveMurderToggle") == 1 then
-    setPrefab("bee", crsRemoveMurder)
-    setPrefab("killerbee", crsRemoveMurder)
-end
-if getConfig("crsButterfliesRemoveMurderToggle") == 1 then
-    setPrefab("butterfly", crsRemoveMurder)
-end
-if getConfig("crsRabbitsRemoveMurderToggle") == 1 then
-    setPrefab("rabbit", crsRemoveMurder)
-end
-if getConfig("crsFishRemoveMurderToggle") == 1 and crsShipwreckedEnabled then
-    setPrefab("jellyfish", crsRemoveMurder)
-end
-if getConfig("crsBirdsRemoveMurderToggle") == 1 then
-    setPrefab("crow", crsRemoveMurder)
-    setPrefab("robin", crsRemoveMurder)
-    setPrefab("robin_winter", crsRemoveMurder)
-end
-if getConfig("crsMosquitosRemoveMurderToggle") == 1 then
-    setPrefab("mosquito", crsRemoveMurder)
 end
 
 -- TWEAK KRAMPED COMPONENT FOR MURDERING STACKS --
 
-local crsVictims = {
+local victims = {
     {prefab = "babybeefalo", penalty = 6},
     {prefab = "teenbird", penalty = 2},
     {prefab = "smallbird", penalty = 6},
@@ -205,7 +138,7 @@ local function giveadditionalnaughtiness(self, inst)
             elseif victim.prefab == "doydoy" then
                 self:OnNaughtyAction(GetWorld().components.doydoyspawner:GetInnocenceValue() * stacksize)
             else
-                for k, v in pairs(crsVictims) do
+                for k, v in pairs(victims) do
                     if victim.prefab == v.prefab then
                         self:OnNaughtyAction(v.penalty * stacksize)
                     end
