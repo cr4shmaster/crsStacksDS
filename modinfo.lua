@@ -2,11 +2,13 @@
 --  makes animals and other items stackable, and prevents animals from starving,
 --  eliminating the need to feed them.
 
--- Author:
--- cr4shmaster: http://steamcommunity.com/id/cr4shmaster
--- Contributors:
--- Whismerhill: http://steamcommunity.com/id/whispershill
--- JNGeist: http://steamcommunity.com/id/jngeist
+-- Workshop Page: http://steamcommunity.com/sharedfiles/filedetails/?id=398305540
+-- Author: cr4shmaster: http://steamcommunity.com/id/cr4shmaster
+-- Contributor: Whismerhill: http://steamcommunity.com/id/whispershill
+-- Contributor: JNGeist: http://steamcommunity.com/id/jngeist
+
+-- Notes:
+-- Can't handle custom stacks for every single item separately
 
 name = "Stacks v2.0"
 description = "Modifies the maximum stack size of all stackable items."
@@ -19,9 +21,6 @@ reign_of_giants_compatible = true
 shipwrecked_compatible = true
 icon_atlas = "modicon.xml"
 icon = "modicon.tex"
-
--- Notes:
--- Can't handle custom stacks for every single item separately
 
 local crsToggle = {
     {description = "Enabled", data = true},
