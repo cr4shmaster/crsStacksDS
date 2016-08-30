@@ -37,7 +37,7 @@ local crsPrefabs = {
     {prefab = "doydoy", dlc = swDLC, noStarve = getConfig("cfgBirdsNoStarve"), stackable = getConfig("cfgBirdsStack"), cantMurder = getConfig("cfgBirdsNoMurder")},
     {prefab = "crab", dlc = swDLC, noStarve = getConfig("cfgCrabsNoStarve"), stackable = getConfig("cfgCrabsStack"), cantMurder = getConfig("cfgCrabsNoMurder")},
     {prefab = "lobster", dlc = swDLC, noStarve = getConfig("cfgCrabsNoStarve"), stackable = getConfig("cfgCrabsStack"), cantMurder = getConfig("cfgCrabsNoMurder")},
-    
+
     -- items --
     {prefab = "glommerwings", dlc = true, stackable = true},
     {prefab = "minotaurhorn", dlc = true, stackable = true},
@@ -77,7 +77,7 @@ end
 for k, v in pairs(crsPrefabs) do
     if v.dlc then -- check if it's DLC is enabled
         if v.noStarve then
-            if anyDLC then -- check if RoG or SW are enabled; there's no starving in vanilla 
+            if anyDLC then -- check if RoG or SW are enabled; there's no starving in vanilla
                 setPrefab(v.prefab, crsUnmakeFeedable)
             end
         end
@@ -137,7 +137,7 @@ local function giveadditionalnaughtiness(self, inst)
                     self:OnNaughtyAction(3 * stacksize)
                 end
             elseif victim.prefab == "doydoy" then
-                self:OnNaughtyAction(GetWorld().components.doydoyspawner:GetInnocenceValue() * stacksize)
+                self:OnNaughtyAction(GLOBAL.GetWorld().components.doydoyspawner:GetInnocenceValue() * stacksize)
             else
                 for k, v in pairs(crsVictims) do
                     if victim.prefab == v.prefab then
