@@ -1,6 +1,7 @@
 getConfig = GetModConfigData
 setPrefab = AddPrefabPostInit
 IsDLCEnabled = GLOBAL.IsDLCEnabled
+GetWorld = GLOBAL.GetWorld
 RoG = GLOBAL.REIGN_OF_GIANTS
 SW = GLOBAL.CAPY_DLC
 
@@ -137,7 +138,7 @@ local function giveadditionalnaughtiness(self, inst)
                     self:OnNaughtyAction(3 * stacksize)
                 end
             elseif victim.prefab == "doydoy" then
-                self:OnNaughtyAction(GLOBAL.GetWorld().components.doydoyspawner:GetInnocenceValue() * stacksize)
+                self:OnNaughtyAction(GetWorld().components.doydoyspawner:GetInnocenceValue() * stacksize)
             else
                 for k, v in pairs(crsVictims) do
                     if victim.prefab == v.prefab then
