@@ -7,6 +7,7 @@
 [![Paypal Donation](https://img.shields.io/badge/donate-paypal-orange.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7AJKEDU7BYRRG) 
 [![Steam Trade Offer](https://img.shields.io/badge/donate-steam%20trade%20offer-orange.svg)](https://steamcommunity.com/tradeoffer/new/?partner=42003848&token=tB7Jhg1K)
 
+###  Description:
 A simple mod that allows everything to stack up your desired value, configurable via the mod settings. 
 Able to make the following items stackable: tallbird eggs, rabbits, moles, birds, crabs, jellyfish. 
 Also able to make the following not require feeding to be kept alive: bees, butterflies, rabbits, birds, moles, mosquitoes, crabs, jellyfish. 
