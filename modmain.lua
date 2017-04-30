@@ -5,7 +5,7 @@ GetWorld = GLOBAL.GetWorld
 RoG = GLOBAL.REIGN_OF_GIANTS
 SW = GLOBAL.CAPY_DLC
 
--- local noDLC = not IsDLCEnabled(RoG) and not GLOBAL.IsDLCEnabled(SW)
+-- local noDLC = not IsDLCEnabled(RoG) and not IsDLCEnabled(SW)
 local anyDLC = IsDLCEnabled(RoG) or IsDLCEnabled(SW)
 -- local rogDLC = IsDLCEnabled(RoG)
 local swDLC = IsDLCEnabled(SW)
