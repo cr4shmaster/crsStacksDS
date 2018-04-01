@@ -56,7 +56,7 @@ end
 -- remove murder action --
 local function crsRemoveMurder(inst)
     if inst.components.health then
-        inst.components.health.cantMurder = false
+        inst.components.health.canmurder = false
     end
 end
 
