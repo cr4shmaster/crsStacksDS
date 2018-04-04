@@ -1,17 +1,6 @@
--- Stacks allows the customization of the maximum stack size of all stackable items,
---  makes animals and other items stackable, and prevents animals from starving,
---  eliminating the need to feed them.
+-- More information here: https://sites.google.com/view/cr4shmaster/stacks-ds-dst
 
--- Workshop Page: http://steamcommunity.com/sharedfiles/filedetails/?id=398305540
--- Author: cr4shmaster: http://steamcommunity.com/id/cr4shmaster
--- Contributor: Whismerhill: http://steamcommunity.com/id/whispershill
--- Contributor: JNGeist: http://steamcommunity.com/id/jngeist
-
--- Notes:
--- Can't handle custom stacks for every single item separately
--- Dropping a stack of animals will only release one and the rest are lost
-
-name = "Stacks v2.0"
+name = "Stacks v2.0.9.4"
 description = "Modifies the maximum stack size of all stackable items."
 author = "cr4shmaster"
 version = "2.0.9.4"
