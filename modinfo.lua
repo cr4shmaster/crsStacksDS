@@ -9,6 +9,7 @@
 
 -- Notes:
 -- Can't handle custom stacks for every single item separately
+-- Dropping a stack of animals will only release one and the rest are lost
 
 name = "Stacks v2.0"
 description = "Modifies the maximum stack size of all stackable items."
@@ -209,14 +210,6 @@ configuration_options = {
         name = "cfgFishNoMurder",
         label = "Can't Murder Fish",
         options = crsToggle,
-        default = true,
-    },
-    {
-        name = "cfgTestCheck",
-        label = "Installed",
-        options = {
-            {description = "Yes", data = true},
-        },
         default = true,
     },
 }
